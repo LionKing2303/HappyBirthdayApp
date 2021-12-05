@@ -26,14 +26,6 @@ class DetailsScreenViewController: UIViewController {
     }
 
     func setup() {
-        selectPicture.backgroundColor = .black
-        selectPicture.setTitleColor(.white, for: .normal)
-        selectPicture.layer.cornerRadius = selectPicture.frame.height / 2
-        
-        showBirthdayScreen.backgroundColor = .black
-        showBirthdayScreen.setTitleColor(.white, for: .normal)
-        showBirthdayScreen.layer.cornerRadius = showBirthdayScreen.frame.height / 2
-        
         imagePickerController.delegate = self
         imagePickerController.mediaTypes = ["public.image"]
     }
