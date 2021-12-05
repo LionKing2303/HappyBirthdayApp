@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Wc7-tE-Aak">
-                                <rect key="frame" x="20" y="193.5" width="374" height="519"/>
+                                <rect key="frame" x="20" y="256" width="374" height="394"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3MB-qJ-Uaa">
                                         <rect key="frame" x="37.5" y="0.0" width="299" height="30"/>
@@ -34,24 +34,30 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="name"/>
                                     </textField>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="l5Q-vj-ga6">
-                                        <rect key="frame" x="0.0" y="50" width="374" height="341"/>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="l5Q-vj-ga6">
+                                        <rect key="frame" x="27" y="50" width="320" height="216"/>
                                     </datePicker>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lu9-b7-MEb">
-                                        <rect key="frame" x="93.5" y="411" width="187" height="44"/>
+                                        <rect key="frame" x="93.5" y="286" width="187" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="YaZ-QX-uS4"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Select picture"/>
+                                        <connections>
+                                            <action selector="selectPictureAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MuB-di-C05"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1X-k1-Zqu">
-                                        <rect key="frame" x="47" y="475" width="280.5" height="44"/>
+                                        <rect key="frame" x="47" y="350" width="280.5" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="GZN-Ws-Dow"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Show birthday screen"/>
+                                        <connections>
+                                            <action selector="showBirthdayScreenAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3oE-f1-sLC"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -74,6 +80,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="datePicker" destination="l5Q-vj-ga6" id="kXV-B7-vsL"/>
+                        <outlet property="name" destination="3MB-qJ-Uaa" id="CaF-t7-m9i"/>
                         <outlet property="selectPicture" destination="Lu9-b7-MEb" id="koB-xg-zfv"/>
                         <outlet property="showBirthdayScreen" destination="o1X-k1-Zqu" id="e34-KF-zop"/>
                     </connections>
