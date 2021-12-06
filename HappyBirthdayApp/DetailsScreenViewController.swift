@@ -36,6 +36,10 @@ class DetailsScreenViewController: UIViewController {
 
         imagePickerController.delegate = self
         imagePickerController.mediaTypes = ["public.image"]
+        
+        viewModel.$showBirthdayScreenDisabled
+            .assign(to: \.isEnabled, on: showBirthdayScreen)
+            .store(in: &cancellables)
     }
     
     private func getInitialValues() {

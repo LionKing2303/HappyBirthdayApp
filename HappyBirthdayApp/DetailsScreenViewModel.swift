@@ -13,6 +13,7 @@ extension DetailsScreenViewController {
         @Published var name: String?
         @Published var birthdayDate: Date?
         @Published var image: UIImage?
+        @Published var showBirthdayScreenDisabled: Bool = true
         private var cachingService: Service
         private var cancellables = Set<AnyCancellable>()
         
@@ -27,7 +28,6 @@ extension DetailsScreenViewController {
             // store data when changes
             $name
                 .dropFirst()
-                .print()
                 .sink { [weak self] name in
                     self?.storeName(name: name)
                 }
@@ -43,6 +43,16 @@ extension DetailsScreenViewController {
                 .sink { [weak self] uiImage in
                     self?.storeImage(uiImage: uiImage)
                 }
+                .store(in: &cancellables)
+            
+            Publishers.CombineLatest($name, $birthdayDate)
+                .map { (name, date) -> Bool in
+                    if let name = name, let _ = date {
+                        return !name.isEmpty
+                    }
+                    return false
+                }
+                .assign(to: \.showBirthdayScreenDisabled, on: self)
                 .store(in: &cancellables)
         }
         
