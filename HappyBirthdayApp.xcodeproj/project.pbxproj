@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC5B532B275D0BDD00F13B58 /* CachingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5B532A275D0BDD00F13B58 /* CachingService.swift */; };
+		AC5B532E275D0CD000F13B58 /* DetailsScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5B532D275D0CD000F13B58 /* DetailsScreenViewModel.swift */; };
 		AC81CF71275BDA6600E56078 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC81CF70275BDA6600E56078 /* AppDelegate.swift */; };
 		AC81CF73275BDA6600E56078 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC81CF72275BDA6600E56078 /* SceneDelegate.swift */; };
 		AC81CF75275BDA6600E56078 /* DetailsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC81CF74275BDA6600E56078 /* DetailsScreenViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC5B532A275D0BDD00F13B58 /* CachingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingService.swift; sourceTree = "<group>"; };
+		AC5B532D275D0CD000F13B58 /* DetailsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenViewModel.swift; sourceTree = "<group>"; };
 		AC81CF6D275BDA6600E56078 /* HappyBirthdayApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyBirthdayApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC81CF70275BDA6600E56078 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC81CF72275BDA6600E56078 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +63,8 @@
 				AC81CF70275BDA6600E56078 /* AppDelegate.swift */,
 				AC81CF72275BDA6600E56078 /* SceneDelegate.swift */,
 				AC81CF74275BDA6600E56078 /* DetailsScreenViewController.swift */,
+				AC5B532D275D0CD000F13B58 /* DetailsScreenViewModel.swift */,
+				AC5B532A275D0BDD00F13B58 /* CachingService.swift */,
 				AC81CF76275BDA6600E56078 /* Main.storyboard */,
 				AC81CF79275BDA6A00E56078 /* Assets.xcassets */,
 				AC81CF7B275BDA6A00E56078 /* LaunchScreen.storyboard */,
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC5B532E275D0CD000F13B58 /* DetailsScreenViewModel.swift in Sources */,
 				AC81CF75275BDA6600E56078 /* DetailsScreenViewController.swift in Sources */,
+				AC5B532B275D0BDD00F13B58 /* CachingService.swift in Sources */,
 				AC81CF71275BDA6600E56078 /* AppDelegate.swift in Sources */,
 				AC81CF73275BDA6600E56078 /* SceneDelegate.swift in Sources */,
 			);

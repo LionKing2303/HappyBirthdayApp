@@ -7,12 +7,15 @@
 
 import UIKit
 import PhotosUI
+import Combine
 
 class DetailsScreenViewController: UIViewController {
 
     // MARK: -- Private variables
+    private let viewModel = ViewModel(service: CachingService())
     private let imagePickerController: UIImagePickerController = .init()
-    
+    private var cancellables = Set<AnyCancellable>()
+
     // MARK: -- Outlets
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -23,11 +26,27 @@ class DetailsScreenViewController: UIViewController {
         super.viewDidLoad()
         
         setup()
+        getInitialValues()
     }
 
     func setup() {
+        name.delegate = self
+        
+        datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+
         imagePickerController.delegate = self
         imagePickerController.mediaTypes = ["public.image"]
+    }
+    
+    private func getInitialValues() {
+        name.text = viewModel.name
+        datePicker.date = viewModel.birthdayDate ?? Date()
+    }
+    
+    @objc
+    func datePickerChanged(picker: UIDatePicker) {
+        // save date
+        viewModel.birthdayDate = picker.date
     }
     
     private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
@@ -44,22 +63,31 @@ class DetailsScreenViewController: UIViewController {
     @IBAction func selectPictureAction(_ sender: Any) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        if let action = self.action(for: .camera, title: "Take photo") {
-            alertController.addAction(action)
-        }
-        if let action = self.action(for: .savedPhotosAlbum, title: "Camera roll") {
-            alertController.addAction(action)
-        }
-        if let action = self.action(for: .photoLibrary, title: "Photo library") {
-            alertController.addAction(action)
-        }
-        
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        _ = [
+            action(for: .camera, title: "Take photo"),
+            action(for: .savedPhotosAlbum, title: "Camera roll"),
+            action(for: .photoLibrary, title: "Photo library"),
+            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        ]
+        .compactMap { $0 }
+        .map(alertController.addAction)
         
         present(alertController, animated: true)
     }
     
     @IBAction func showBirthdayScreenAction(_ sender: Any) {
+    }
+}
+
+extension DetailsScreenViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        // save name
+        viewModel.name = updatedText
+        return true
     }
 }
 
@@ -70,6 +98,8 @@ extension DetailsScreenViewController: UIImagePickerControllerDelegate, UINaviga
             return
         }
         
-        
+        // save image
+        viewModel.image = image
+        picker.dismiss(animated: true, completion: nil)
     }
 }
