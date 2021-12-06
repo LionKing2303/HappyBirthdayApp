@@ -79,7 +79,10 @@ class DetailsScreenViewController: UIViewController {
         present(alertController, animated: true)
     }
     
-    @IBAction func showBirthdayScreenAction(_ sender: Any) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let birthdayScreen = segue.destination as? BirthdayScreenViewController {
+            
+        }
     }
 }
 
