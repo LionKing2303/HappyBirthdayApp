@@ -55,7 +55,9 @@ class DetailsScreenViewController: UIViewController {
             self?.viewModel.image = image
         }
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let birthdayScreen = segue.destination as? BirthdayScreenViewController {
             let service: Service = CachingService()
@@ -76,6 +78,10 @@ extension DetailsScreenViewController: UITextFieldDelegate {
         
         // save name
         viewModel.name = updatedText
+        return true
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
 }

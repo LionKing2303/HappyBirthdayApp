@@ -53,7 +53,7 @@ final class ImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigation
             return
         }
         
-        self.didFinishPicking?(image)
+        self.didFinishPicking?(image.upOrientationImage())
         picker.dismiss(animated: true, completion: nil)
     }
 }

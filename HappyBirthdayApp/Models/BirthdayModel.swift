@@ -54,12 +54,3 @@ struct BirthdayModel {
         return UIImage(named: "ageNumber0")!
     }
 }
-
-extension Date {
-    func years(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
-    }
-    func months(from date: Date) -> Int {
-        return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
-    }
-}

@@ -20,6 +20,9 @@
 		AC81CF78275BDA6600E56078 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC81CF76275BDA6600E56078 /* Main.storyboard */; };
 		AC81CF7A275BDA6A00E56078 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC81CF79275BDA6A00E56078 /* Assets.xcassets */; };
 		AC81CF7D275BDA6A00E56078 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC81CF7B275BDA6A00E56078 /* LaunchScreen.storyboard */; };
+		ACDC621A275FD7230020D940 /* UIImage+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC6219275FD7230020D940 /* UIImage+Orientation.swift */; };
+		ACDC621C275FD7500020D940 /* UIImageView+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC621B275FD7500020D940 /* UIImageView+Rounded.swift */; };
+		ACDC621F275FD7890020D940 /* Date+Months.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC621E275FD7890020D940 /* Date+Months.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		AC81CF79275BDA6A00E56078 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC81CF7C275BDA6A00E56078 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC81CF7E275BDA6A00E56078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACDC6219275FD7230020D940 /* UIImage+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Orientation.swift"; sourceTree = "<group>"; };
+		ACDC621B275FD7500020D940 /* UIImageView+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Rounded.swift"; sourceTree = "<group>"; };
+		ACDC621E275FD7890020D940 /* Date+Months.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Months.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,12 +118,23 @@
 				AC1B8179275E7A19007B626A /* ViewModels */,
 				AC1B8186275E8770007B626A /* Models */,
 				AC1B817B275E7A1F007B626A /* Services */,
+				ACDC621D275FD75F0020D940 /* Extensions */,
 				AC81CF76275BDA6600E56078 /* Main.storyboard */,
 				AC81CF79275BDA6A00E56078 /* Assets.xcassets */,
 				AC81CF7B275BDA6A00E56078 /* LaunchScreen.storyboard */,
 				AC81CF7E275BDA6A00E56078 /* Info.plist */,
 			);
 			path = HappyBirthdayApp;
+			sourceTree = "<group>";
+		};
+		ACDC621D275FD75F0020D940 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ACDC6219275FD7230020D940 /* UIImage+Orientation.swift */,
+				ACDC621B275FD7500020D940 /* UIImageView+Rounded.swift */,
+				ACDC621E275FD7890020D940 /* Date+Months.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,13 +210,16 @@
 				AC1B8181275E7B90007B626A /* BirthdayScreenViewModel.swift in Sources */,
 				AC5B532E275D0CD000F13B58 /* DetailsScreenViewModel.swift in Sources */,
 				AC81CF75275BDA6600E56078 /* DetailsScreenViewController.swift in Sources */,
+				ACDC621F275FD7890020D940 /* Date+Months.swift in Sources */,
 				AC1C7BA0275FAAAA004C5590 /* ImagePicker.swift in Sources */,
 				AC5B532B275D0BDD00F13B58 /* CachingService.swift in Sources */,
 				AC1B817E275E7AFF007B626A /* BirthdayScreenViewController.swift in Sources */,
 				AC81CF71275BDA6600E56078 /* AppDelegate.swift in Sources */,
 				AC1B8184275E876B007B626A /* BirthdayModel.swift in Sources */,
+				ACDC621C275FD7500020D940 /* UIImageView+Rounded.swift in Sources */,
 				AC81CF73275BDA6600E56078 /* SceneDelegate.swift in Sources */,
 				AC1C7BA3275FCC03004C5590 /* Style.swift in Sources */,
+				ACDC621A275FD7230020D940 /* UIImage+Orientation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

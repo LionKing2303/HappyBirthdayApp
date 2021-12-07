@@ -15,7 +15,7 @@ class BirthdayScreenViewController: UIViewController {
     private let imagePicker = ImagePicker()
     private var cancellables = Set<AnyCancellable>()
     private var screenShot: UIImage? {
-        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, self.view.isOpaque, 3.0)
+        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, self.view.isOpaque, 0.0)
         // hide elements that are not reuired for the screen shot
         shareTheNews.isHidden = true
         camera.isHidden = true
@@ -100,23 +100,8 @@ class BirthdayScreenViewController: UIViewController {
     private func setImage() {
         image.image = viewModel?.image
         if viewModel?.imageShouldBeClipped == true {
-            image.image = self.makeRoundImage(image: image)
+            image.makeRoundImage()
         }
-    }
-    
-    private func makeRoundImage(image: UIImageView) -> UIImage {
-        let layer = CALayer()
-        layer.frame = image.bounds
-        layer.contents = image.image?.cgImage
-        layer.masksToBounds = true
-
-        layer.cornerRadius = image.frame.size.width/2
-
-        UIGraphicsBeginImageContext(image.bounds.size)
-        layer.render(in: UIGraphicsGetCurrentContext()!)
-        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return roundedImage!
     }
     
     private func positionCameraButton() {
