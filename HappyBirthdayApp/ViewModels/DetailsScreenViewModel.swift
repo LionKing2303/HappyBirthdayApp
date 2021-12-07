@@ -14,6 +14,10 @@ extension DetailsScreenViewController {
         @Published var birthdayDate: Date?
         @Published var image: UIImage?
         @Published var showBirthdayScreenDisabled: Bool = true
+        var birthdayModel: BirthdayModel {
+            .init(name: name, birthdayDate: birthdayDate, image: image)
+        }
+        
         private var cachingService: Service
         private var cancellables = Set<AnyCancellable>()
         

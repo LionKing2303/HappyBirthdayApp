@@ -81,7 +81,8 @@ class DetailsScreenViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let birthdayScreen = segue.destination as? BirthdayScreenViewController {
-            
+            let vm = BirthdayScreenViewController.ViewModel(model: viewModel.birthdayModel)
+            birthdayScreen.setViewModel(viewModel: vm)
         }
     }
 }

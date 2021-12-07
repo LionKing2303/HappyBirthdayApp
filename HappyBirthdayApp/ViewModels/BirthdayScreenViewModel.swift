@@ -10,22 +10,36 @@ import UIKit
 extension BirthdayScreenViewController {
     class ViewModel {
         var nameTitle: String {
-            "TODAY MESSI IS"
+            model.getNameTitle()
         }
-        var age: UIImage? {
-            UIImage()
+        var age: UIImage {
+            model.getAgeImage()
         }
         var measureTitle: String {
-            ""
+            model.getMeasureTitle()
         }
-        var image: UIImage? {
-            UIImage()
+        var image: UIImage {
+            if let image = model.image {
+                return image
+            }
+            return style.placeholderImage()
         }
-        var cameraImage: UIImage? {
-            UIImage()
+        var imageShouldBeClipped: Bool {
+            model.image != nil
         }
-        var background: UIImage? {
-            UIImage()
+        var cameraImage: UIImage {
+            style.cameraImage()
+        }
+        var background: UIImage {
+            style.backgroudImage()
+        }
+        
+        @Published var style: Style = .elephant
+        @Published var model: BirthdayModel
+        
+        init(model: BirthdayModel) {
+            self.model = model
+            self.style = Style.allCases.randomElement() ?? .elephant
         }
     }
 }
