@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+final class ImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private let imagePickerController: UIImagePickerController = .init()
     private var didFinishPicking: ((UIImage?)->Void)?
     private weak var viewController: UIViewController?
@@ -34,6 +34,7 @@ class ImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
         
         self.viewController?.present(alertController, animated: true)
     }
+    
     private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
         guard UIImagePickerController.isSourceTypeAvailable(type) else {
             return nil
@@ -44,6 +45,7 @@ class ImagePicker: NSObject, UIImagePickerControllerDelegate, UINavigationContro
             self.viewController?.present(self.imagePickerController, animated: true)
         }
     }
+    
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let image = info[.originalImage] as? UIImage else {

@@ -9,9 +9,9 @@ import UIKit
 import Combine
 
 extension DetailsScreenViewController {
-    class ViewModel {
+    final class ViewModel {
         @Published var name: String?
-        @Published var birthdayDate: Date?
+        @Published var birthdayDate: Date
         @Published var image: UIImage?
         @Published var showBirthdayScreenDisabled: Bool = true
         var birthdayModel: BirthdayModel {
@@ -26,7 +26,7 @@ extension DetailsScreenViewController {
             
             // fetch the cached data
             name = cachingService.name
-            birthdayDate = cachingService.birthday
+            birthdayDate = cachingService.birthday ?? Date()
             image = cachingService.image
             
             // store data when changes
@@ -49,9 +49,10 @@ extension DetailsScreenViewController {
                 }
                 .store(in: &cancellables)
             
+            // enable/disable the button based on inputs
             Publishers.CombineLatest($name, $birthdayDate)
                 .map { (name, date) -> Bool in
-                    if let name = name, let _ = date {
+                    if let name = name {
                         return !name.isEmpty
                     }
                     return false

@@ -38,8 +38,9 @@ class DetailsScreenViewController: UIViewController {
     }
     
     private func getInitialValues() {
+        // get initial values if cached
         name.text = viewModel.name
-        datePicker.date = viewModel.birthdayDate ?? Date()
+        datePicker.date = viewModel.birthdayDate
     }
     
     @objc
@@ -47,8 +48,6 @@ class DetailsScreenViewController: UIViewController {
         // save date
         viewModel.birthdayDate = picker.date
     }
-    
-    
     
     @IBAction func selectPictureAction(_ sender: Any) {
         imagePicker.presentImagePicker(on: self) { [weak self] image in
@@ -59,8 +58,12 @@ class DetailsScreenViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let birthdayScreen = segue.destination as? BirthdayScreenViewController {
-            let vm = BirthdayScreenViewController.ViewModel(model: viewModel.birthdayModel, service: CachingService())
-            birthdayScreen.setViewModel(viewModel: vm)
+            let service: Service = CachingService()
+            let birthdayScreenViewModel = BirthdayScreenViewController.ViewModel(
+                model: viewModel.birthdayModel,
+                service: service
+            )
+            birthdayScreen.setViewModel(viewModel: birthdayScreenViewModel)
         }
     }
 }

@@ -154,6 +154,9 @@
                                     <constraint firstAttribute="height" constant="42" id="vLh-Bc-9v6"/>
                                 </constraints>
                                 <state key="normal" title="Share the news" image="shareWhiteSmall"/>
+                                <connections>
+                                    <action selector="shareTheNewsButtonAction:" destination="TDT-Xw-Wcs" eventType="touchUpInside" id="zbG-Th-Ryf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lI3-r2-p7O">
                                 <rect key="frame" x="13" y="53.5" width="26" height="22"/>
@@ -204,6 +207,7 @@
                         <outlet property="camera" destination="gya-Rf-OFT" id="QHt-44-78b"/>
                         <outlet property="cameraCenterX" destination="6gR-NG-bPo" id="mft-IS-ZMg"/>
                         <outlet property="cameraCenterY" destination="A1Z-gi-Zq6" id="ecf-Wu-BLU"/>
+                        <outlet property="close" destination="lI3-r2-p7O" id="lb9-2I-q3Q"/>
                         <outlet property="image" destination="T3N-fA-Exg" id="tN3-ZT-X01"/>
                         <outlet property="measureTitle" destination="2qv-TO-J9U" id="xRf-P0-PEL"/>
                         <outlet property="nameTitle" destination="JRc-H1-Nq0" id="blw-oL-22v"/>

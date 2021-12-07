@@ -8,57 +8,32 @@
 import UIKit
 import Combine
 
-enum Style: CaseIterable {
-    case elephant, fox, pelican
-    
-    func backgroudImage() -> UIImage {
-        switch self {
-        case .elephant: return UIImage(named: "bgElephant")!
-        case .fox: return UIImage(named: "bgFox")!
-        case .pelican: return UIImage(named: "bgPelican")!
-        }
-    }
-    
-    func cameraImage() -> UIImage {
-        switch self {
-        case .elephant: return UIImage(named: "cameraIconYellow")!
-        case .fox: return UIImage(named: "cameraIconGreen")!
-        case .pelican: return UIImage(named: "cameraIconBlue")!
-        }
-    }
-    
-    func placeholderImage() -> UIImage {
-        switch self {
-        case .elephant: return UIImage(named: "defaultPlaceHolderYellow")!
-        case .fox: return UIImage(named: "defaultPlaceHolderGreen")!
-        case .pelican: return UIImage(named: "defaultPlaceHolderBlue")!
-        }
-    }
-    
-    func backgroundColor() -> UIColor {
-        switch self {
-        case .elephant: return UIColor(red: 254/255, green: 239/255, blue: 203/255, alpha: 1.0)
-        case .fox: return UIColor(red: 197/255, green: 232/255, blue: 223/255, alpha: 1.0)
-        case .pelican: return UIColor(red: 218/255, green: 241/255, blue: 246/255, alpha: 1.0)
-        }
-    }
-    
-    func borderColor() -> UIColor {
-        switch self {
-        case .elephant: return UIColor(red: 254/255, green: 190/255, blue: 32/255, alpha: 1.0)
-        case .fox: return UIColor(red: 111/255, green: 197/255, blue: 175/255, alpha: 1.0)
-        case .pelican: return UIColor(red: 139/255, green: 211/255, blue: 228/255, alpha: 1.0)
-        }
-    }
-}
-
 class BirthdayScreenViewController: UIViewController {
     
     // MARK: -- Private variables
     private var viewModel: ViewModel?
     private let imagePicker = ImagePicker()
     private var cancellables = Set<AnyCancellable>()
-
+    private var screenShot: UIImage? {
+        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, self.view.isOpaque, 3.0)
+        // hide elements that are not reuired for the screen shot
+        shareTheNews.isHidden = true
+        camera.isHidden = true
+        close.isHidden = true
+        
+        // render the view
+        self.view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // show the elements back
+        shareTheNews.isHidden = false
+        camera.isHidden = false
+        close.isHidden = false
+        
+        return image
+    }
+    
     // MARK: -- Outlets
     @IBOutlet weak var nameTitle: UILabel!
     @IBOutlet weak var age: UIImageView!
@@ -69,6 +44,7 @@ class BirthdayScreenViewController: UIViewController {
     @IBOutlet weak var shareTheNews: UIButton!
     @IBOutlet weak var cameraCenterX: NSLayoutConstraint!
     @IBOutlet weak var cameraCenterY: NSLayoutConstraint!
+    @IBOutlet weak var close: UIButton!
     
     func setViewModel(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -77,10 +53,11 @@ class BirthdayScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        viewModel?.refreshImage.sink(receiveValue: { [weak self] _ in
-            self?.setImage()
-        })
-        .store(in: &cancellables)
+        viewModel?.refreshImage
+            .sink(receiveValue: { [weak self] _ in
+                self?.setImage()
+            })
+            .store(in: &cancellables)
     }
     
     @IBAction func cameraButtonAction(_ sender: Any) {
@@ -94,10 +71,20 @@ class BirthdayScreenViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func shareTheNewsButtonAction(_ sender: Any) {
+        guard let screenShot = screenShot else { return }
+        let activityViewController = UIActivityViewController(
+            activityItems: [screenShot],
+            applicationActivities: nil
+        )
+        present(activityViewController, animated: true)
+    }
+    
     func setupUI() {
         shareTheNews.backgroundColor = UIColor(red: 239/255, green: 123/255, blue: 123/255, alpha: 1.0)
         shareTheNews.layer.cornerRadius = shareTheNews.frame.height / 2
-        
+        positionCameraButton()
+
         nameTitle.text = viewModel?.nameTitle
         age.image = viewModel?.age
         measureTitle.text = viewModel?.measureTitle
@@ -108,7 +95,6 @@ class BirthdayScreenViewController: UIViewController {
         camera.setImage(viewModel?.cameraImage, for: .normal)
         background.image = viewModel?.background
         view.backgroundColor = viewModel?.backgroundColor
-        positionCameraButton()
     }
     
     private func setImage() {
