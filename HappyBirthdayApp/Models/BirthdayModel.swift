@@ -11,7 +11,11 @@ import UIKit
 struct BirthdayModel {
     let name: String?
     let birthdayDate: Date?
-    let image: UIImage?
+    var image: UIImage?
+    
+    mutating func setImage(image: UIImage) {
+        self.image = image
+    }
     
     func getNameTitle() -> String {
         guard let name = name else { return "" }

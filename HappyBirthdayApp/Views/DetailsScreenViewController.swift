@@ -13,7 +13,7 @@ class DetailsScreenViewController: UIViewController {
 
     // MARK: -- Private variables
     private let viewModel = ViewModel(service: CachingService())
-    private let imagePickerController: UIImagePickerController = .init()
+    private let imagePicker = ImagePicker()
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: -- Outlets
@@ -31,12 +31,7 @@ class DetailsScreenViewController: UIViewController {
 
     func setup() {
         name.delegate = self
-        
         datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
-
-        imagePickerController.delegate = self
-        imagePickerController.mediaTypes = ["public.image"]
-        
         viewModel.$showBirthdayScreenDisabled
             .assign(to: \.isEnabled, on: showBirthdayScreen)
             .store(in: &cancellables)
@@ -53,35 +48,18 @@ class DetailsScreenViewController: UIViewController {
         viewModel.birthdayDate = picker.date
     }
     
-    private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
-        guard UIImagePickerController.isSourceTypeAvailable(type) else {
-            return nil
-        }
-        
-        return UIAlertAction(title: title, style: .default) { _ in
-            self.imagePickerController.sourceType = type
-            self.present(self.imagePickerController, animated: true)
-        }
-    }
+    
     
     @IBAction func selectPictureAction(_ sender: Any) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        _ = [
-            action(for: .camera, title: "Take photo"),
-            action(for: .savedPhotosAlbum, title: "Camera roll"),
-            action(for: .photoLibrary, title: "Photo library"),
-            UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        ]
-        .compactMap { $0 }
-        .map(alertController.addAction)
-        
-        present(alertController, animated: true)
+        imagePicker.presentImagePicker(on: self) { [weak self] image in
+            // save image
+            self?.viewModel.image = image
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let birthdayScreen = segue.destination as? BirthdayScreenViewController {
-            let vm = BirthdayScreenViewController.ViewModel(model: viewModel.birthdayModel)
+            let vm = BirthdayScreenViewController.ViewModel(model: viewModel.birthdayModel, service: CachingService())
             birthdayScreen.setViewModel(viewModel: vm)
         }
     }
@@ -96,18 +74,5 @@ extension DetailsScreenViewController: UITextFieldDelegate {
         // save name
         viewModel.name = updatedText
         return true
-    }
-}
-
-extension DetailsScreenViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        guard let image = info[.originalImage] as? UIImage else {
-            return
-        }
-        
-        // save image
-        viewModel.image = image
-        picker.dismiss(animated: true, completion: nil)
     }
 }

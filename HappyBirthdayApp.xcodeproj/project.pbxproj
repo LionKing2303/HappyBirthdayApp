@@ -10,6 +10,7 @@
 		AC1B817E275E7AFF007B626A /* BirthdayScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1B817D275E7AFF007B626A /* BirthdayScreenViewController.swift */; };
 		AC1B8181275E7B90007B626A /* BirthdayScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1B8180275E7B90007B626A /* BirthdayScreenViewModel.swift */; };
 		AC1B8184275E876B007B626A /* BirthdayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1B8183275E876B007B626A /* BirthdayModel.swift */; };
+		AC1C7BA0275FAAAA004C5590 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1C7B9F275FAAAA004C5590 /* ImagePicker.swift */; };
 		AC5B532B275D0BDD00F13B58 /* CachingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5B532A275D0BDD00F13B58 /* CachingService.swift */; };
 		AC5B532E275D0CD000F13B58 /* DetailsScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5B532D275D0CD000F13B58 /* DetailsScreenViewModel.swift */; };
 		AC81CF71275BDA6600E56078 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC81CF70275BDA6600E56078 /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 		AC1B817D275E7AFF007B626A /* BirthdayScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayScreenViewController.swift; sourceTree = "<group>"; };
 		AC1B8180275E7B90007B626A /* BirthdayScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayScreenViewModel.swift; sourceTree = "<group>"; };
 		AC1B8183275E876B007B626A /* BirthdayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayModel.swift; sourceTree = "<group>"; };
+		AC1C7B9F275FAAAA004C5590 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		AC5B532A275D0BDD00F13B58 /* CachingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingService.swift; sourceTree = "<group>"; };
 		AC5B532D275D0CD000F13B58 /* DetailsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenViewModel.swift; sourceTree = "<group>"; };
 		AC81CF6D275BDA6600E56078 /* HappyBirthdayApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HappyBirthdayApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +54,7 @@
 			children = (
 				AC81CF74275BDA6600E56078 /* DetailsScreenViewController.swift */,
 				AC1B817D275E7AFF007B626A /* BirthdayScreenViewController.swift */,
+				AC1C7B9F275FAAAA004C5590 /* ImagePicker.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				AC1B8181275E7B90007B626A /* BirthdayScreenViewModel.swift in Sources */,
 				AC5B532E275D0CD000F13B58 /* DetailsScreenViewModel.swift in Sources */,
 				AC81CF75275BDA6600E56078 /* DetailsScreenViewController.swift in Sources */,
+				AC1C7BA0275FAAAA004C5590 /* ImagePicker.swift in Sources */,
 				AC5B532B275D0BDD00F13B58 /* CachingService.swift in Sources */,
 				AC1B817E275E7AFF007B626A /* BirthdayScreenViewController.swift in Sources */,
 				AC81CF71275BDA6600E56078 /* AppDelegate.swift in Sources */,

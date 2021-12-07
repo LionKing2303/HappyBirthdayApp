@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 extension BirthdayScreenViewController {
     class ViewModel {
@@ -41,11 +42,20 @@ extension BirthdayScreenViewController {
         }
         
         @Published var style: Style = .elephant
-        @Published var model: BirthdayModel
-        
-        init(model: BirthdayModel) {
+        var model: BirthdayModel
+        var refreshImage: PassthroughSubject<Void,Never> = .init()
+        private var cachingService: Service
+
+        init(model: BirthdayModel, service: Service) {
             self.model = model
+            self.cachingService = service
             self.style = Style.allCases.randomElement() ?? .elephant
+        }
+        
+        func updateImage(image: UIImage) {
+            cachingService.image = image
+            self.model.setImage(image: image)
+            refreshImage.send()
         }
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 enum Style: CaseIterable {
     case elephant, fox, pelican
@@ -55,7 +56,9 @@ class BirthdayScreenViewController: UIViewController {
     
     // MARK: -- Private variables
     private var viewModel: ViewModel?
-    
+    private let imagePicker = ImagePicker()
+    private var cancellables = Set<AnyCancellable>()
+
     // MARK: -- Outlets
     @IBOutlet weak var nameTitle: UILabel!
     @IBOutlet weak var age: UIImageView!
@@ -74,6 +77,17 @@ class BirthdayScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        viewModel?.refreshImage.sink(receiveValue: { [weak self] _ in
+            self?.setImage()
+        })
+        .store(in: &cancellables)
+    }
+    
+    @IBAction func cameraButtonAction(_ sender: Any) {
+        imagePicker.presentImagePicker(on: self) { [weak self] image in
+            guard let image = image else { return }
+            self?.viewModel?.updateImage(image: image)
+        }
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -87,10 +101,7 @@ class BirthdayScreenViewController: UIViewController {
         nameTitle.text = viewModel?.nameTitle
         age.image = viewModel?.age
         measureTitle.text = viewModel?.measureTitle
-        image.image = viewModel?.image
-        if viewModel?.imageShouldBeClipped == true {
-            image.image = self.makeRoundImage(image: image)
-        }
+        setImage()
         image.layer.borderWidth = 7.0
         image.layer.borderColor = viewModel?.borderColor.cgColor
         image.layer.cornerRadius = image.frame.size.width/2
@@ -98,6 +109,13 @@ class BirthdayScreenViewController: UIViewController {
         background.image = viewModel?.background
         view.backgroundColor = viewModel?.backgroundColor
         positionCameraButton()
+    }
+    
+    private func setImage() {
+        image.image = viewModel?.image
+        if viewModel?.imageShouldBeClipped == true {
+            image.image = self.makeRoundImage(image: image)
+        }
     }
     
     private func makeRoundImage(image: UIImageView) -> UIImage {
