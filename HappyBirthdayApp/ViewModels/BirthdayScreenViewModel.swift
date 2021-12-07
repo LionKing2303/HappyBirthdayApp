@@ -33,6 +33,12 @@ extension BirthdayScreenViewController {
         var background: UIImage {
             style.backgroudImage()
         }
+        var backgroundColor: UIColor {
+            style.backgroundColor()
+        }
+        var borderColor: UIColor {
+            style.borderColor()
+        }
         
         @Published var style: Style = .elephant
         @Published var model: BirthdayModel
