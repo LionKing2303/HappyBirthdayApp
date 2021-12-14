@@ -52,7 +52,6 @@ class BirthdayScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         viewModel?.refreshImage
             .sink(receiveValue: { [weak self] _ in
                 self?.setImage()
@@ -60,6 +59,12 @@ class BirthdayScreenViewController: UIViewController {
             .store(in: &cancellables)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.layoutSubviews()
+        setupUI()
+    }
+
     @IBAction func cameraButtonAction(_ sender: Any) {
         imagePicker.presentImagePicker(on: self) { [weak self] image in
             guard let image = image else { return }
@@ -83,7 +88,6 @@ class BirthdayScreenViewController: UIViewController {
     func setupUI() {
         shareTheNews.backgroundColor = UIColor(red: 239/255, green: 123/255, blue: 123/255, alpha: 1.0)
         shareTheNews.layer.cornerRadius = shareTheNews.frame.height / 2
-        positionCameraButton()
 
         nameTitle.text = viewModel?.nameTitle
         age.image = viewModel?.age
@@ -91,10 +95,11 @@ class BirthdayScreenViewController: UIViewController {
         setImage()
         image.layer.borderWidth = 7.0
         image.layer.borderColor = viewModel?.borderColor.cgColor
-        image.layer.cornerRadius = image.frame.size.width/2
+        image.layer.cornerRadius = image.bounds.size.height/2
         camera.setImage(viewModel?.cameraImage, for: .normal)
         background.image = viewModel?.background
         view.backgroundColor = viewModel?.backgroundColor
+        positionCameraButton()
     }
     
     private func setImage() {
@@ -105,7 +110,7 @@ class BirthdayScreenViewController: UIViewController {
     }
     
     private func positionCameraButton() {
-        let radius = image.frame.width / 2
+        let radius = image.bounds.width / 2
         let offsetX = sin(45) * radius
         let offsetY = -(cos(45) * radius)
         cameraCenterX.constant = offsetX
